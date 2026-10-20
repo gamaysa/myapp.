@@ -19,7 +19,10 @@ jobs:
         echo "dependencyResolutionManagement { repositories { google(); mavenCentral() } }" >> app/settings.gradle
         echo "plugins { id 'com.android.application' version '8.1.0' }" > app/build.gradle
         echo "android { namespace 'com.cleaner.booster'; compileSdk 33; defaultConfig { applicationId 'com.cleaner.booster'; minSdk 21; targetSdk 33 } }" >> app/build.gradle
-        cd app && gradle wrapper --gradle-version 8.0 && ./gradlew assembleDebug
+        cd app
+        echo "distributionUrl=https\://services.gradle.org/distributions/gradle-8.0-bin.zip" > gradle/wrapper/gradle-wrapper.properties
+        gradle wrapper --gradle-version 8.0
+        ./gradlew assembleDebug
     - uses: actions/upload-artifact@v4
       with:
         name: apk
