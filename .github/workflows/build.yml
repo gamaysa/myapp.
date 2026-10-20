@@ -15,10 +15,10 @@ jobs:
         cp *.java app/src/main/java/com/cleaner/booster/
         echo "<?xml version=\"1.0\" encoding=\"utf-8\"?><manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"com.cleaner.booster\"><uses-sdk android:minSdkVersion=\"21\" android:targetSdkVersion=\"33\" /><uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" /><uses-permission android:name=\"android.permission.MANAGE_EXTERNAL_STORAGE\" /><uses-permission android:name=\"android.permission.FOREGROUND_SERVICE\" /><uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" /><application android:label=\"Max Booster\"><activity android:name=\".MainActivity\"><intent-filter><action android:name=\"android.intent.action.MAIN\" /><category android:name=\"android.intent.category.LAUNCHER\" /></intent-filter></activity><service android:name=\".HogService\" /><receiver android:name=\".BootReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver></application></manifest>" > app/src/main/AndroidManifest.xml
         echo "sdk.dir=/usr/local/lib/android/sdk" > app/local.properties
-        echo "buildscript { repositories { google(); mavenCentral() } dependencies { classpath 'com.android.tools.build:gradle:7.4.2' } }" > app/build.gradle
-        echo "plugins { id 'com.android.application' } android { namespace 'com.cleaner.booster'; compileSdk 33; defaultConfig { applicationId 'com.cleaner.booster'; minSdk 21; targetSdk 33 } }" >> app/build.gradle
-        echo "allprojects { repositories { google(); mavenCentral() } }" > app/settings.gradle
-        cd app && gradle wrapper --gradle-version 7.5 && ./gradlew assembleDebug
+        echo "plugins { id 'com.android.application' version '7.4.2' }" > app/build.gradle
+        echo "android { namespace 'com.cleaner.booster'; compileSdk 33; defaultConfig { applicationId 'com.cleaner.booster'; minSdk 21; targetSdk 33 } }" >> app/build.gradle
+        echo "dependencyResolutionManagement { repositories { google(); mavenCentral() } }" > app/settings.gradle
+        cd app && gradle wrapper --gradle-version 8.0 && ./gradlew assembleDebug
     - uses: actions/upload-artifact@v4
       with:
         name: apk
