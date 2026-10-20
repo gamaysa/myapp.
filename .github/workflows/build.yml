@@ -19,7 +19,7 @@ jobs:
         echo "plugins { id 'com.android.application' } android { namespace 'com.cleaner.booster'; compileSdk 33; defaultConfig { applicationId 'com.cleaner.booster'; minSdk 21; targetSdk 33 } }" >> app/build.gradle
         echo "allprojects { repositories { google(); mavenCentral() } }" > app/settings.gradle
         cd app && gradle wrapper --gradle-version 7.5 && ./gradlew assembleDebug
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: apk
         path: app/build/outputs/apk/debug/*.apk
